@@ -2,11 +2,13 @@
 
 class Logger
 {
-	private $instance;
+	private static $instance;
 	
 	public static function log($logLevel, $message)
 	{
-		return $this->instance->doLog($logLevel, $message);
+		if(!self::$instance)
+			self::$instance = new Logger();
+		return self::$instance->doLog($logLevel, $message);
 	}
 	
 	public function doLog($logLevel, $message)
